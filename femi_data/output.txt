@@ -1,0 +1,141 @@
+TASK A
+duplicate key value violates unique constraint "spectator_pkey"
+DETAIL:  Key (sno)=(100) already exists.
+
+   sno         sname             semail
+0  100       J. Chin   j.chin@uea.ac.uk
+1  200       W. Wang  whw@somewhere.net
+2  300     P. Mayhew      pwm@gmail.com
+3  400     R. Lapper       rl@uea.ac.uk
+4  500  P. Chardaire       pc@uea.ac.uk
+ 
+TASK B
+duplicate key value violates unique constraint "event_pkey"
+DETAIL:  Key (ecode)=(A100) already exists.
+
+  ecode              edesc  elocation       edate     etime  emax
+0  A100  100 metres sprint  Stadium 1  2024-07-12  16:00:00  1000
+1  AMTH           Marathon  Stadium 1  2024-07-12  18:00:00  1000
+2  A400  400 metres sprint  Stadium 1  2024-07-12  10:00:00  1000
+3  ALJP          Long Jump  Stadium 1  2024-07-12  10:00:00  1000
+4  YCHT       Yacht Racing     Marina  2024-07-12  09:00:00   200
+5  WSRF       Wind Surfing     Marina  2024-07-12  12:00:00   200
+6  JUDO               Judo    Arena 2  2024-07-12  10:00:00     3
+7  SWIM           Swimming       Pool  2024-07-12  10:00:00   100
+ 
+TASK E: Issue a ticket for an event
+Showing all Tickets for an event held by a particular spectator 
+   tno ecode  sno
+0    1  A100  100
+ 
+Attempt to issue a ticket if they don't alrady have one 
+Spectator has ticket for that event
+CONTEXT:  PL/pgSQL function checking_multiple_ticket() line 13 at RAISE
+
+ 
+Showing all Tickets for an event held by a particular spectator 
+   tno ecode  sno
+0    1  A100  100
+ 
+
+TASK F - Report Total Spectators Liable to Travel
+   elocation       edate  total_spectators
+0    Arena 2  2024-07-12                 3
+1     Marina  2024-07-12                 5
+2       Pool  2024-07-12                 0
+3  Stadium 1  2024-07-12                12
+ 
+TASK G
+  ecode              edesc  total_tickets
+0  A100  100 metres sprint              5
+1  A400  400 metres sprint              2
+2  JUDO               Judo              3
+3  ALJP          Long Jump              2
+4  AMTH           Marathon              3
+5  SWIM           Swimming              0
+6  WSRF       Wind Surfing              2
+7  YCHT       Yacht Racing              3
+ 
+TASK H
+SELECT 5
+   tno ecode  sno
+0    1  A100  100
+1    2  A100  200
+2    3  A100  300
+3    4  A100  500
+4   20  A100  400
+TASK I
+SELECT 3
+   tno ecode  sno
+0    1  A100  100
+1    5  ALJP  100
+2   17  JUDO  100
+TASK J
+DELETE 1
+    tno ecode  sno
+0     2  A100  200
+1     3  A100  300
+2     4  A100  500
+3     5  ALJP  100
+4     6  ALJP  200
+5     7  AMTH  200
+6     8  AMTH  300
+7     9  AMTH  500
+8    10  A400  200
+9    11  A400  300
+10   12  YCHT  200
+11   13  YCHT  300
+12   14  YCHT  500
+13   15  WSRF  200
+14   16  WSRF  300
+15   17  JUDO  100
+16   18  JUDO  300
+17   19  JUDO  200
+18   20  A100  400
+ 
+TASK D
+DELETE 1
+  ecode              edesc  elocation       edate     etime  emax
+0  AMTH           Marathon  Stadium 1  2024-07-12  18:00:00  1000
+1  A400  400 metres sprint  Stadium 1  2024-07-12  10:00:00  1000
+2  ALJP          Long Jump  Stadium 1  2024-07-12  10:00:00  1000
+3  YCHT       Yacht Racing     Marina  2024-07-12  09:00:00   200
+4  WSRF       Wind Surfing     Marina  2024-07-12  12:00:00   200
+5  JUDO               Judo    Arena 2  2024-07-12  10:00:00     3
+6  SWIM           Swimming       Pool  2024-07-12  10:00:00   100
+ 
+TASK K
+DELETE 0
+    tno ecode  sno
+0     5  ALJP  100
+1     6  ALJP  200
+2     7  AMTH  200
+3     8  AMTH  300
+4     9  AMTH  500
+5    10  A400  200
+6    11  A400  300
+7    12  YCHT  200
+8    13  YCHT  300
+9    14  YCHT  500
+10   15  WSRF  200
+11   16  WSRF  300
+12   17  JUDO  100
+13   18  JUDO  300
+14   19  JUDO  200
+ 
+TASK C
+Cannot delete spectator with valid tickets.
+CONTEXT:  PL/pgSQL function prevent_spectator_deletion() line 17 at RAISE
+
+   sno         sname             semail
+0  100       J. Chin   j.chin@uea.ac.uk
+1  200       W. Wang  whw@somewhere.net
+2  300     P. Mayhew      pwm@gmail.com
+3  400     R. Lapper       rl@uea.ac.uk
+4  500  P. Chardaire       pc@uea.ac.uk
+ 
+TASK L
+Deleted contents of the event table.
+Deleted contents of the spectator table.
+Deleted contents of the ticket table.
+Deleted contents of the cancel table.
